@@ -12,11 +12,18 @@ public class play
     {
     	intro();
         showBoard();
-        turn();
-        turn();
-        turn();
-        turn();
-        turn();
+        
+        while(/*checkWin()*/true)
+        {
+        	turn();
+        	
+        	if(p1 == p2)
+        	{
+        		break;
+        	}
+        }
+        
+        System.out.println("Winner");
     }
     
     //-----------------------------------------------------
@@ -86,10 +93,10 @@ public class play
     	System.out.println("Please enter the column number: ");
     	int x = kb.nextInt();
     	
-    	/*System.out.println("Plese enter the column number: ");
+    	/*System.out.println("Please enter the column number: ");
          int y = kb.nextInt();*/
 		
-    	int y = 0;
+    	//int y = 0;
     	
 		if(!(play % 2 == 0))
 		{
@@ -99,28 +106,64 @@ public class play
 		{
 			value = "Y";
 		}
-		
     	
-    	for(int row = 0; row < board.length; row++)
-    	{
-    		try
-    		{
-        		if(board[x][row] == "0")
-        		{
-        			board[x][row-1] = "0";
-        			board[x][row] = value;
-        		}
-    			
-        		
-    		}
-    		catch(ArrayIndexOutOfBoundsException a)
-    		{
-    			
-    		}
-    		
-    		play++;
-    		
-    	}
+		for(int row = board.length-1; row >= 0; row--)
+		{
+			try
+			{
+				if(board[x][row] == "0")
+				{
+					board[x][row] = value;
+					play++;
+					break;
+				}
+			}
+			catch(Exception e)
+			{
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		/*
+         
+         for(int row = 0; row < board.length; row++)
+         {
+         try
+         {
+         /*if(!(board[x][row] == "0"))
+         {
+         //board[x][row-1] = "0";
+         board[x][row-1] = value;
+         }
+         
+         if(board[x][row] == "0")
+         {
+         board[x][row] = value;
+         
+         if(board[x][row+1] == "0")
+         {
+         board[x][row] = "0";
+         board[x][row+1] = value;
+         }
+         }
+         
+         
+         }
+         catch(ArrayIndexOutOfBoundsException a)
+         {
+         
+         }
+         
+         play++;
+         
+         }
+         */
     	
     	/*if(play == 2)
          {
@@ -188,37 +231,37 @@ public class play
     	}
     }
     
-    public static int checkWin() 	//in progress
-    {
-    	int counter1 = 0;
-        
-        /* horizontally */
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board.length; j++) {
-                if(board[i][j] == board[i][j + 1])
-                    counter1++;
-                
-                if(counter1 == 4)
-                    return 1;
-            }
-        }
-        
-        /* vertically */
-        
-        int counter2 = 0;
-        for(int a = 0; a < board.length; a++) {
-            for(int b = 0; b < board.length; b++) {
-                if(board[b][a] == board[b + 1][a])
-                    counter2++;
-                
-                if(counter2 == 4)
-                    return 1;
-            }
-        }
-        
-        return 0;
-        
-    }
+    /*public static boolean checkWin() 	//in progress
+     {
+     int counter1 = 0;
+     
+     horizontally
+     for(int i = 0; i < board.length; i++) {
+     for(int j = 0; j < board.length; j++) {
+     if((board[i][j] == board[i][j + 1]))
+     counter1++;
+     
+     if(counter1 == 4)
+     return true;
+     }
+     }
+     
+     vertically
+     
+     int counter2 = 0;
+     for(int a = 0; a < board.length; a++) {
+     for(int b = 0; b < board.length; b++) {
+     if(board[b][a] == board[b + 1][a])
+     counter2++;
+     
+     if(counter2 == 4)
+     return true;
+     }
+     }
+     
+     return false;
+   	 
+     }*/
     
     public static void turn()
     {
